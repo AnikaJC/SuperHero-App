@@ -11,7 +11,7 @@ const getSuperHero =(id, name) => {
   .then(response => response.json())
   .then(json => {
     console.log(json)
-    heroImageDiv.innerHTML += `<img src = "${json.image.url}" height = 250, width = 250/>`             
+    heroImageDiv.innerHTML = `<img src = "${json.image.url}" height = 250, width = 250/>`             
   })
 }
 const randomHero = () =>{
