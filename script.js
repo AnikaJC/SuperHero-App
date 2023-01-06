@@ -15,10 +15,9 @@ const getSuperHero = (id, name) => {
     .then(response => response.json())
     .then(json => {
       console.log(json.powerstats)
-      getStatsHTML(json)
-      const name = `<h2>${json.name}</h2>`
-
-      heroImageDiv.innerHTML = `${name}<img src = "${json.image.url}" height = 250, width = 250/> `
+      const superHero = json
+      showHeroInfo(superHero)
+      
     })
 }
 const statToEmoji = {
@@ -30,11 +29,19 @@ const statToEmoji = {
   combat: '⚔️',
 }
 
-const getStatsHTML = (character) => {
+const showHeroInfo = (character) => {
+  const name = `<h2>${character.name}</h2>`
+
+  const img = `<img src = "${character.image.url}" height = 250, width = 250/>`
+    
   const stats = Object.keys(character.powerstats).map(stat => {
-    return `<p> ${statToEmoji[stat]} ${stat} : ${character.powerstats[stat]} </p>`
-  })
-  console.log(stats)
+    return `<p> ${statToEmoji[stat]} ${stat.toUpperCase()} : ${character.powerstats[stat]} </p>`
+  }).join('')
+  
+  //console.log(stats.join(''))
+  heroImageDiv.innerHTML = `${name} ${img} ${stats} `
+  
+ 
 }
 
 const getSearchSuperHero = (name) => {
@@ -42,8 +49,8 @@ const getSearchSuperHero = (name) => {
     .then(response => response.json())
     .then(json => {
       const shero = json.results[0]
-      console.log(shero)
-      heroImageDiv.innerHTML = `<img src = "${shero.image.url}" height = 250, width = 250/>`
+      showHeroInfo(shero)
+      
     })
 }
 
