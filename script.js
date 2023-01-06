@@ -21,10 +21,18 @@ const getSuperHero = (id, name) => {
       heroImageDiv.innerHTML = `${name}<img src = "${json.image.url}" height = 250, width = 250/> `
     })
 }
+const statToEmoji = {
+  intelligence: '🧠',
+  strength: '💪',
+  speed: '⚡',
+  durability: '🏋️‍♂️',
+  power: '📊',
+  combat: '⚔️',
+}
 
 const getStatsHTML = (character) => {
   const stats = Object.keys(character.powerstats).map(stat => {
-    return `<p> ${stat} : ${character.powerstats[stat]} </p>`
+    return `<p> ${statToEmoji[stat]} ${stat} : ${character.powerstats[stat]} </p>`
   })
   console.log(stats)
 }
